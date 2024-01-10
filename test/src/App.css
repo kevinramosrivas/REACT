@@ -1,0 +1,26 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+}
+.background-img {
+  /* color amrillo */
+  background-color: #f5d300;
+  max-width: 27rem;
+  width: 100%;
+}
+
+.idol-image {
+  width: 20rem;
+  height: 20rem;
+  object-fit: cover;
+}
+
+.card-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+
+}

@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import './App.css';
 //import Actividad1 from './components/actividad1';
-import ChuckNorrisJoke from './components/actividad9';
-import { useState, useEffect , useRef} from 'react';
-//importar lazy
-//import { lazy, Suspense } from 'react';
+import ReyesGodos from './components/actividad10';
+import ColorInput from './components/ColorInputactividad10';
+
+import { ContextProvider} from './context/Context';
+
 
 
 
@@ -15,57 +16,68 @@ import { useState, useEffect , useRef} from 'react';
 
 
 function App() {
-
-  const [jokes, setJokes] = useState([]);
-  const refEffect = useRef(false);
-  const getJokes = async () => {
-    setJokes(
-      <div className="spinner-border text-primary d-block" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    ); 
-    let url = 'https://api.chucknorris.io/jokes/random';
-    fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      setJokes(<ChuckNorrisJoke value={data.value} />);
-    })
-    .catch(e => console.log(e));
-  }
-  useEffect(() => {
-    if (!refEffect.current) {
-      getJokes();
+  const reyes=[
+    {
+        nombre:"Atanagildo",
+        reinado:15,
+        vacasComidas:9,
+        src:"https://html6.es/img/rey_atanagildo.png"
+    },{
+        nombre:"Ervigio",
+        reinado:7,
+        vacasComidas:3,
+        src:"https://html6.es/img/rey_ervigio.png"
+    },{
+        nombre:"Ataúlfo",
+        reinado:5,
+        vacasComidas:16,
+        src:"https://html6.es/img/rey_ataulfo.png"
+    },{
+        nombre:"Leovigildo",
+        reinado:18,
+        vacasComidas:3,
+        src:"https://html6.es/img/rey_leovigildo.png"
+    },{
+        nombre:"Sisebuto",
+        reinado:9,
+        vacasComidas:13,
+        src:"https://html6.es/img/rey_sisebuto.png"
+    },{
+        nombre:"Recesvinto",
+        reinado:19,
+        vacasComidas:11,
+        src:"https://html6.es/img/rey_recesvinto.png"
+    },{
+        nombre:"Teodorico",
+        reinado:33,
+        vacasComidas:12,
+        src:"https://html6.es/img/rey_teodorico.png"
     }
-    
-    return () => {
-      refEffect.current = true;
-    }
-
-  }
-  , []);
-  
- 
+  ]
 
   return (
-    <>
+    <ContextProvider >
       <div className="container">
         <div className="row m-4 d-flex justify-content-center align-items-center text-center">
           <div className="col-12">
-            <h1>Chistes de Chuck Norris</h1>
-            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/24a5439f-42c4-4cc0-ac08-6b064dd4eac5/diqxlb-a7c04866-2048-438c-b8cd-d63b39f3f108.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzI0YTU0MzlmLTQyYzQtNGNjMC1hYzA4LTZiMDY0ZGQ0ZWFjNVwvZGlxeGxiLWE3YzA0ODY2LTIwNDgtNDM4Yy1iOGNkLWQ2M2IzOWYzZjEwOC5naWYifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.M9oTeJL9BoGdBxYyO_DyDEycjdr9m_AgmKwtP_KLYfc" alt="Chuck Norris" className="img-fluid w-25" />
+            <h1>Actividad 10</h1>
+            <p>Selecciona un color para los componentes</p>
+            <ColorInput/>
           </div>
         </div>
-
-        <div className="row m-4 d-flex justify-content-center align-items-center text-center">
-          <div className="col-6 d-flex justify-content-center align-items-center text-center">
-            {jokes}
-          </div>
-          <div className="col-12">
-            <button className="btn btn-primary m-3 text-center" onClick={() => getJokes()}>Otro chiste</button>
+        <div className="row m-4 card-columns">
+          <div className="card-columns">
+            
+                {reyes.map((rey, index) => {
+                  return (
+                      <ReyesGodos nombre={rey.nombre} titulo={rey.reinado} descripcion={rey.vacasComidas} imagen={rey.src} index={rey.nombre} key={index}/>
+                  )
+                })}
+            
           </div>
         </div>
       </div>
-    </>
+    </ContextProvider>
   )
 }
 
